@@ -45,7 +45,7 @@ public class ImageProcess {
 
                 ByteArrayOutputStream os = new ByteArrayOutputStream();
 
-                ImageIO.write(sourceImage, mimeType, os);
+                ImageIO.write(sourceImage, mimeType.substring(6), os);
 
                 os.flush();
 
@@ -59,4 +59,5 @@ public class ImageProcess {
             return Files.readAllBytes(source.toPath());
         }
     }
+
 }
