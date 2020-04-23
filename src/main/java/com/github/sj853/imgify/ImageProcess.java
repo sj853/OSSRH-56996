@@ -1,4 +1,4 @@
-package com.hongmei.utils.imgify;
+package com.github.sj853.imgify;
 
 import org.apache.tika.Tika;
 import org.slf4j.Logger;
