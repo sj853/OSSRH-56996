@@ -40,7 +40,7 @@ public class ImageProcess {
 
             String mimeType = tika.detect(source);
 
-            if (Arrays.binarySearch(IMAGE_MIME_TYPES, mimeType) > 0) {
+            if (Arrays.asList(IMAGE_MIME_TYPES).contains(mimeType)) {
                 BufferedImage sourceImage = Optional.ofNullable(ImageIO.read(source)).orElseThrow(() -> new Exception("文件不是图片文件"));
 
                 ByteArrayOutputStream os = new ByteArrayOutputStream();

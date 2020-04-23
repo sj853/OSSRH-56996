@@ -6,7 +6,7 @@
 
     <groupId>com.github.sj853</groupId>
     <artifactId>OSSRH-56996</artifactId>
-    <version>0.1.0</version>
+    <version>0.1.1</version>
 
     <name>${project.groupId}:${project.artifactId}</name>
     <description>处理图片exif信息</description>
