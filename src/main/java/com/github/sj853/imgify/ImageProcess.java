@@ -1,17 +1,18 @@
 package com.github.sj853.imgify;
 
 import org.apache.tika.Tika;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.Optional;
+import java.util.Scanner;
 
 /**
  * 图片处理
@@ -21,8 +22,6 @@ import java.util.Optional;
  * created on 2020/4/22 16:08
  */
 public class ImageProcess {
-
-    private static final Logger logger = LoggerFactory.getLogger(ImageProcess.class);
 
     private static final String[] IMAGE_MIME_TYPES = {"image/tiff", "image/jpeg", "image/png", "image/webp", "image/gif", "image/bmp"};
 
@@ -58,6 +57,24 @@ public class ImageProcess {
         } catch (Exception e) {
             return Files.readAllBytes(source.toPath());
         }
+    }
+
+    public static void main(String[] args) throws IOException {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("请输入要处理图片或目录绝对路径：");
+        String sourceDirectoryPath = sc.nextLine();
+        System.out.println("请输入要存放的路径：");
+        String destDirectoryPath = sc.nextLine();
+
+        byte[] bytes = ImageProcess.clearExif(FileSystems.getDefault().getPath(sourceDirectoryPath).toFile());
+
+        FileOutputStream fileOutputStream = new FileOutputStream(FileSystems.getDefault().getPath(destDirectoryPath).toFile());
+
+        fileOutputStream.write(bytes);
+
+        fileOutputStream.flush();
+
+        fileOutputStream.close();
     }
 
 }
