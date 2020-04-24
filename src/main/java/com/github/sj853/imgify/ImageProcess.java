@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.util.Arrays;
-import java.util.Optional;
 import java.util.Scanner;
 
 /**
@@ -40,7 +39,13 @@ public class ImageProcess {
             String mimeType = tika.detect(source);
 
             if (Arrays.asList(IMAGE_MIME_TYPES).contains(mimeType)) {
-                BufferedImage sourceImage = Optional.ofNullable(ImageIO.read(source)).orElseThrow(() -> new Exception("文件不是图片文件"));
+
+
+                BufferedImage sourceImage = ImageIO.read(source);
+
+                if (sourceImage == null) {
+                    throw new Exception("文件不是图片文件");
+                }
 
                 ByteArrayOutputStream os = new ByteArrayOutputStream();
 
